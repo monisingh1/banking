@@ -1,0 +1,28 @@
+16.Create FD 
+URL:http://localhost:5000/customer/fixeddeposit?id=6655a51a7672e9098d0d075b
+Request Type:POST
+Request Body:{
+    "fd_amount":10000,
+    "email":"monisingh7476@gmail.com",
+    "fd_duration":2
+}
+
+Response:
+
+{
+    "status": true,
+    "fd_record": {
+        "customer_id": "6655a51a7672e9098d0d075b",
+        "accno": 7079103,
+        "fd_amount": 10000,
+        "balance_after_creating_fd": 14000,
+        "transaction_type": "Fixed Deposit",
+        "interestRate": 7.1,
+        "fd_duration": 2,
+        "timestamp": "Wed May 29 2024 15:06:09 GMT+0530 (India Standard Time)",
+        "interestAmount": 1420,
+        "_id": "6656f794f32431764a063eb9",
+        "__v": 0
+    },
+    "msg": "Successfully Created Fixed Deposit"
+}

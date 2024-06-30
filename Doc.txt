@@ -1,0 +1,5 @@
+The process.env is a global variable injected at runtime by your Node.js application to depict the state of the environment your app is in at the time of initiation and utilize the same at runtime. 
+
+There by, its basic use is to depict the state of the system environment of our app on initialization
+
+The NODE_ENV works like a flag which indicates whether the server is running on development or production mode

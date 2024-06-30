@@ -1,0 +1,102 @@
+const CustomerModal = require('../modal/CustomerModal');
+
+const register = async (req, res) => {
+    console.log("Request Body:", req.body)
+    //destructuring
+    const { name, accno, email, balance, password, mobile, city, state, pincode, gender, pancard } = req.body
+
+    try {
+        //Customer Modal
+        var customer = new CustomerModal({
+            "name": name,
+            "accno": accno,
+            "email": email,
+            "balance": balance,
+            "password": password,
+            "mobile": mobile,
+            "city": city,
+            "state": state,
+            "pincode": pincode,
+            "gender": gender,
+            "pancard": pancard
+        })
+
+        console.log(customer)
+        customer.save()
+            .then((response) => {
+                return res.status(200).json({
+                    "record": response,
+                    "msg": "Register Customer Successfully"
+                })
+            })
+            .catch((error) => {
+                return res.status(404).json({
+                    "error": error,
+                    "msg": "Customer Not Register"
+                })
+            })
+    } 
+    catch (error) {
+        return res.status(404).json({
+            "error": error,
+            "msg": "Customer Not Register"
+        })
+    }
+}
+
+const login = async (req, res) => {
+    console.log("/login")
+}
+
+module.exports = {
+    register,
+    login
+}
+
+========================================================
+
+const CustomerModal = require('../modal/CustomerModal');
+const bcrypt = require('bcrypt');
+
+
+const register = async (req, res) => {
+    console.log("Request Body:", req.body)
+    
+    try {
+        //logic for checking already exists email
+        const cust = await CustomerModal.findOne({ email:req.body.email });
+        console.log("Customer Single Record:",cust)
+        if (cust) {
+            return res.status(400).json({
+                success: false,
+                msg: "Email already exists"
+            });
+        }
+
+        //Customer Modal
+        var customer = new CustomerModal(req.body)
+        console.log(customer)
+        var response = await customer.save()
+        return res.status(200).json({
+            "record": response,
+            "msg": "Register Customer Successfully"
+        })
+    } 
+    catch (error) {
+        return res.status(404).json({
+            success:false,
+            "error": error,
+            "msg": "Customer Not Register"
+        })
+    }
+}
+
+const login = async (req, res) => {
+    console.log("/login")
+}
+
+module.exports = {
+    register,
+    login
+}
+
